@@ -1,3 +1,4 @@
+---@param props IGuiButtonProps
 return function(props)
     local font = props.font or love.graphics.getFont()
     local padding = {
@@ -6,7 +7,7 @@ return function(props)
     }
     local width = math.max(props.width or 0, font:getWidth(props.text) + padding.horizontal)
     local height = math.max(props.height or 0, font:getHeight(props.text) + padding.vertical)
-    return badr {
+    return GUI {
         text = props.text,
         icon = props.icon or nil,
         --

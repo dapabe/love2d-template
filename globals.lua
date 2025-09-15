@@ -2,31 +2,34 @@
 -- !! This flag controls the ability to toggle the debug view.         !!
 -- !! You will want to turn this to 'true' when you publish your game. !!
 -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-RELEASE = false
+_G.RELEASE = false
 
 -- Enables the debug stats
-DEBUG = not RELEASE
+_G.DEBUG = not RELEASE
 
 -- @see https://github.com/icrawler/luacolors
-colors = require("lib.luacolors")
+_G.colors = require("lib.luacolors")
 
 -- @see https://github.com/Nabeel20/Badr
-badr = require("lib.badr")
+_G.GUI = require("lib.badr.badr")
 
 -- @see https://github.com/tesselode/roomy
-roomy = require("lib.roomy").new()
+_G.SceneManager = require("lib.roomy.roomy").new()
 
 -- @see https://github.com/Sheepolution/flux
-flux = require("lib.flux")
+_G.flux = require("lib.flux")
 
 -- @see https://github.com/Sheepolution/step
-step = require("lib.step")
+_G.step = require("lib.step")
 
 -- @see https://github.com/jeduden/lurker
-lurker = require("lib.lurker")
+-- Hot Module Replacement
+_G.HMR = require("lib.lurker")
 
 -- @see https://github.com/NQMVD/lume
-lume = require("lib.lume")
+_G.lume = require("lib.lume")
+
+_G.Class = require("lib.class")
 
 -- @see https://github.com/tesselode/baton
 -- baton = require("lib.baton")
@@ -55,14 +58,17 @@ lume = require("lib.lume")
 -- @see https://github.com/deltadaedalus/vudu
 -- vudu = require("lib.vudu")
 
-scenes = {
-  splash = require("src.scenes.splash"),
-  credits = require("src.scenes.credits"),
-  mainMenu = require("src.scenes.main-menu"),
+require("src.utils.printTable")
+
+_G.SceneList = {
+  Splash = require("src.scenes.Splash-scene"),
+  Credits = require("src.scenes.Credits-scene"),
+  MainMenu = require("src.scenes.MainMenu-scene"),
+  -- PlayableMap = require("src.scenes.PlayableMap-scene")
 }
 
-CONFIG = {
-  showSplash = true,
+_G.CONFIG = {
+  showSplash = false,
   joystick = love.joystick.getJoysticks()[1],
   deadzone = .33,
   graphics = {

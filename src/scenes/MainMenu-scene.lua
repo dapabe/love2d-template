@@ -1,25 +1,35 @@
-local mainMenu = {}
-
 local button = require 'src.ui.components.button'
 local label  = require 'src.ui.components.label'
 
--- `previous` - the previously active scene, or `false` if there was no previously active scene
--- `...` - additional arguments passed to `manager.enter` or `manager.push`
-function mainMenu:enter(previous, ...)
+---@class IScene
+local MainMenuScene = {}
+local menu
+
+function MainMenuScene:enter(previous, ...)
   -- set up the level
   love.graphics.setBackgroundColor(colors.rgbForGraphics(colors.Slate800))
 
   local clicks = 0
-  menu = badr { column = true, gap = 10 }
+  menu = GUI { column = true, gap = 10 }
       + label({ text = "Main Menu", width = 200 })
       + button {
         text = 'New game',
         width = 200,
-        onHover = function()
-          print 'mouse entered'
-          return function()
-            print('mouse exited')
-          end
+        onClick = function()
+          SceneManager:push(require("src.scenes.PlayableMap-scene"), "listen")
+        end,
+        -- onHover = function()
+        --   print 'mouse entered'
+        --   return function()
+        --     print('mouse exited')
+        --   end
+        -- end
+      }
+      + button {
+        text = 'Connect',
+        width = 200,
+        onClick = function()
+          SceneManager:push(require("src.scenes.PlayableMap-scene"), "client")
         end
       }
       + button { text = 'Settings', width = 200, onClick = function()
@@ -29,7 +39,7 @@ function mainMenu:enter(previous, ...)
         end
       end }
       + button { text = 'Credits', width = 200, onClick = function()
-        roomy:push(scenes.credits)
+        SceneManager:push(SceneList.Credits)
       end }
       + button { text = 'Quit', width = 200, onClick = function() love.event.quit() end }
       + button {
@@ -54,36 +64,30 @@ function mainMenu:enter(previous, ...)
   )
 end
 
-function mainMenu:update(dt)
+function MainMenuScene:update(dt)
   -- update entities
   menu:update()
 end
 
-function mainMenu:keypressed(key)
+function MainMenuScene:keypressed(key)
   -- someone pressed a key
 end
 
--- `next` - the scene that will be active next
--- `...` - additional arguments passed to `manager.enter` or `manager.pop`
-function mainMenu:leave(next, ...)
+function MainMenuScene:leave(next, ...)
   -- destroy entities and cleanup resources
 end
 
--- `next` - the scene that was pushed on top of this scene
--- `...` - additional arguments passed to `manager.push`
-function mainMenu:pause(next, ...)
+function MainMenuScene:pause(next, ...)
   -- destroy entities and cleanup resources
 end
 
--- `previous` - the scene that was popped
--- `...` - additional arguments passed to `manager.pop`
-function mainMenu:resume(previous, ...)
+function MainMenuScene:resume(previous, ...)
   -- Called when a scene is popped and this scene becomes active again.
 end
 
-function mainMenu:draw()
+function MainMenuScene:draw()
   -- draw the level
   menu:draw()
 end
 
-return mainMenu
+return MainMenuScene

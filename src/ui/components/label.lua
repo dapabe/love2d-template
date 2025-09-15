@@ -1,8 +1,9 @@
+---@param options IGuiLabelProps
 local function label(options)
     local _font = options.font or love.graphics.getFont()
     local color = options.color or { colors.rgbForGraphics(colors.Slate800) }
 
-    return badr {
+    return GUI {
         text = options.text or options,
         visible = options.visible or true,
         id = options.id,

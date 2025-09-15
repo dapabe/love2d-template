@@ -24,7 +24,7 @@ Pressing `\`` at any time will toggle the debug menu.
 ### Modules
 
 * [Badr](https://github.com/Nabeel20/Badr) - Simple and easy user interfaces with composable components
-* [Roomy](https://github.com/tesselode/roomy) - Organize your game into "screens" (title/start screen, levels, pause screen)
+* [Roomy](https://github.com/tesselode/SceneManager) - Organize your game into "screens" (title/start screen, levels, pause screen)
 * [Flux (fork)](https://github.com/Sheepolution/flux) - Fast, lightweight tweening library
 * [Step](https://github.com/Sheepolution/step) - Timer module for interval actions or delayed actions
 * [Lurker (fork)](https://github.com/jeduden/lurker) - Auto-swaps changed files in a running
